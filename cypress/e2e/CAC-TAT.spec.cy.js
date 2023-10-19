@@ -1,7 +1,6 @@
 /// <reference types="Cypress"/>
 
-describe('Central de Atentimento ao Cliente TAT', () => {
-  //Antes de cada teste, visite o endereço que eu passar
+describe('Central de Atentimento ao Cliente TAT', () => {  
   beforeEach(() => {
     cy.visit('./src/index.html')
   })
@@ -9,22 +8,22 @@ describe('Central de Atentimento ao Cliente TAT', () => {
 
   it('Verifica Título da aplicação', () => {
     cy.title().should('eq', 'Central de Atendimento ao Cliente TAT')
-    cy.get('#firstName').type('Thiagão Da Massa')
+    cy.get('#firstName').type('Tom')
   })
 
   it('Preenche os campos obrigatórios e envia o formulário', () => {
     cy.get('#firstName')
       .should('be.visible')
-      .type('Thiaguissimo')
-      .should('have.value', 'Thiaguissimo')
+      .type('Tom')
+      .should('have.value', 'Tom')
     cy.get('#lastName')
       .should('be.visible')
-      .type('Ribeirão')
-      .should('have.value', 'Ribeirão')
+      .type('Riddle')
+      .should('have.value', 'Riddle')
     cy.get('#email')
       .should('be.visible')
-      .type('antonio.feliciano@btgpactual.com')
-      .should('have.value', 'antonio.feliciano@btgpactual.com')
+      .type('tomriddle@test.com')
+      .should('have.value', 'tomriddle@test.com')
     cy.get('#open-text-area')
       .type('Qual a probabilidade do Vasco ser classifi cado para libertadores?')
     cy.get('.button').click()
@@ -34,15 +33,15 @@ describe('Central de Atentimento ao Cliente TAT', () => {
   it('Exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', () => {
     cy.get('#firstName')
       .should('be.visible')
-      .type('Thribeirodev')
-      .should('have.value', 'Thribeirodev')
+      .type('Tom')
+      .should('have.value', 'Tom')
     cy.get('#lastName')
       .should('be.visible')
-      .type('Feliciano')
-      .should('have.value', 'Feliciano')
+      .type('Riddle')
+      .should('have.value', 'Riddle')
     cy.get('#email')
       .should('be.visible')
-      .type('antonio.feliciano,btgpactual.com')
+      .type('tomriddle,test.com')
     cy.get('#open-text-area')
       .type('Qual a probabilidade do Vasco ser classificado para libertadores?')
     cy.get('.button')
@@ -55,15 +54,15 @@ describe('Central de Atentimento ao Cliente TAT', () => {
   it('Exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
     cy.get('#firstName')
       .should('be.visible')
-      .type('Thribeirodev')
-      .should('have.value', 'Thribeirodev')
+      .type('Tom')
+      .should('have.value', 'Tom')
       cy.get('#lastName')
       .should('be.visible')
-      .type('Feliciano')
-      .should('have.value','Feliciano')
+      .type('Riddle')
+      .should('have.value','Riddle')
     cy.get('#email')
       .should('be.visible')
-      .type('antonio.feliciano,btgpactual.com')
+      .type('tomriddle@test.com')
     cy.get('#open-text-area')
       .type('Qual a probabilidade do Vasco ser classificado para libertadores?')
     cy.get('#phone-checkbox')
@@ -82,18 +81,18 @@ describe('Central de Atentimento ao Cliente TAT', () => {
 
   it('Preenche e limpa os campos nome, sobrenome, email e telefone', () => {
     cy.get('#firstName')
-      .type('Thiago')
-      .should('have.value','Thiago')
+      .type('Tom')
+      .should('have.value','Tom')
       .clear()
       .should('have.value','')
     cy.get('#lastName')
-      .type('Ribeiro')
-      .should('have.value','Ribeiro')
+      .type('Riddle')
+      .should('have.value','Riddle')
       .clear()
       .should('have.value','')
     cy.get('#email')
-      .type('antonio.feliciano,btgpactual.com')
-      .should('have.value','antonio.feliciano,btgpactual.com')
+      .type('tomriddle@test.com')
+      .should('have.value','tomriddle@test.com')
       .clear()
       .should('have.value','')
     cy.get('#phone')
@@ -113,20 +112,20 @@ describe('Central de Atentimento ao Cliente TAT', () => {
 
   it('Verifica diminuição de código', () => {
     const formData = {
-      firstName: "Antonio",
-      lastName: "Feliciano de Castilho",
-      email: "antonio.feliciano@btgpactual.com",
-      message: "Vasco "
+      firstName: "Jaffrey",
+      lastName: "Thompson Grey",
+      email: "jaffrey@test.com",
+      message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut tellus nec sapien fringilla pharetra. Nulla facilisi. Nullam laoreet quam id sapien lacinia, in interdum justo euismod. Sed feugiat quam a tortor venenatis, sed fringilla massa vulputate." 
     }
     cy.fillMandatoryFieldsAndSubmit(formData)
   })
 
   it('Utilizando o contains', () => {
     const formData = {
-      firstName: "Thiagao",
-      lastName: "Feliciano de Castilho",
-      email: "antonio.feliciano@btgpactual.com",
-      message: "Vasco "
+      firstName: "Jaffrey",
+      lastName: "Thompson Grey",
+      email: "jaffrey@test.com",
+      message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut tellus nec sapien fringilla pharetra. Nulla facilisi. Nullam laoreet quam id sapien lacinia, in interdum justo euismod. Sed feugiat quam a tortor venenatis, sed fringilla massa vulputate." 
     }
     cy.fillMandatoryFieldsAndSubmit(formData)
     cy.get('#open-text-area').type('teste')
@@ -134,29 +133,29 @@ describe('Central de Atentimento ao Cliente TAT', () => {
   })
   it('Sem diminuir delay do teste', () => {
     const formData = {
-      firstName: "Antonio",
-      lastName: "Feliciano de Castilho",
-      email: "antonio.feliciano@btgpactual.com",
-      message: "Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco " 
-    }
+      firstName: "Jaffrey",
+      lastName: "Thompson Grey",
+      email: "jaffrey@test.com",
+      message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut tellus nec sapien fringilla pharetra. Nulla facilisi. Nullam laoreet quam id sapien lacinia, in interdum justo euismod. Sed feugiat quam a tortor venenatis, sed fringilla massa vulputate." 
+     }
     cy.fillMandatoryFieldsAndSubmit(formData)
     cy.get('span[class="success"]').should('be.visible')
 
   })
   it('Diminuindo o delay do teste', () => {
-    const longtext = "Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco " 
+    const longtext = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut tellus nec sapien fringilla pharetra. Nulla facilisi. Nullam laoreet quam id sapien lacinia, in interdum justo euismod. Sed feugiat quam a tortor venenatis, sed fringilla massa vulputate." 
     cy.get('#firstName')
       .should('be.visible')
-      .type('Thiaguissimo')
-      .should('have.value', 'Thiaguissimo')
+      .type('Tom')
+      .should('have.value', 'Tom')
     cy.get('#lastName')
       .should('be.visible')
-      .type('Ribeirão')
-      .should('have.value', 'Ribeirão')
+      .type('Riddle')
+      .should('have.value', 'Riddle')
     cy.get('#email')
       .should('be.visible')
-      .type('antonio.feliciano@btgpactual.com')
-      .should('have.value', 'antonio.feliciano@btgpactual.com')
+      .type('tomriddle@test.com')
+      .should('have.value', 'tomriddle@test.com')
     cy.get('#open-text-area')
       .type(longtext,{delay: 0})
     cy.get('.button').click()
@@ -165,10 +164,10 @@ describe('Central de Atentimento ao Cliente TAT', () => {
    })
    it('Seleciona tipo do produto', () => {
     const formData = {
-      firstName: "Antonio",
-      lastName: "Feliciano de Castilho",
-      email: "antonio.feliciano@btgpactual.com",
-      message: "Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco " 
+      firstName: "Markety",
+      lastName: "Markety Grey",
+      email: "matkety@test.com",
+      message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut tellus nec sapien fringilla pharetra. Nulla facilisi. Nullam laoreet quam id sapien lacinia, in interdum justo euismod. Sed feugiat quam a tortor venenatis, sed fringilla massa vulputate." 
     }
     cy.OnlyWriteObritatoryinputs(formData)
     cy.get('#product').select('Blog')
@@ -180,10 +179,10 @@ describe('Central de Atentimento ao Cliente TAT', () => {
    })
    it('Selecionando radios do tipo de atendimento', () => {
     const formData = {
-      firstName: "Antonio",
-      lastName: "Feliciano de Castilho",
-      email: "antonio.feliciano@btgpactual.com",
-      message: "Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco " 
+      firstName: "Ravier",
+      lastName: "Thompson Grey",
+      email: "ravier@test.com",
+      message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut tellus nec sapien fringilla pharetra. Nulla facilisi. Nullam laoreet quam id sapien lacinia, in interdum justo euismod. Sed feugiat quam a tortor venenatis, sed fringilla massa vulputate." 
     }
     cy.OnlyWriteObritatoryinputs(formData)
     cy.get('input[type="radio"][value="feedback"]').check()
@@ -193,18 +192,17 @@ describe('Central de Atentimento ao Cliente TAT', () => {
     cy.get('span[class="success"]').should('be.visible')
       .should('contain', 'Mensagem enviada com sucesso.')
    })
-   //Pegando toddos os elementos das opções de atendimento, botoes de radius para checkar
+
    it('Utilizando wrap e each nos testes', () => {
     cy.get('input[type="radio"]')
       .should('have.length', 3)
-      .each(($radio)=> { //utilizo jquery criando um $radio onde com o each ele guarda CADA valor em $radio e crio uma função para que ele possa dazer PARA CADA valor, checkar, 
-        //com o wrap ele empacota todos os valores e da um check em cada
+      .each(($radio)=> { 
         cy.wrap($radio).check()
         cy.wrap($radio).should('be.checked')
       })
    })
 
-   it.only('Marcando varios checkboxes de uma só vez', () => {
+   it('Marcando varios checkboxes de uma só vez', () => {
     cy.get('input[type="checkbox"]')
       .as('checkbox')
       .check()
@@ -215,7 +213,7 @@ describe('Central de Atentimento ao Cliente TAT', () => {
       })
     })
 
-    it.only('Marca e desmarca todos os checkboxes', () => {
+    it('Marca e desmarca todos os checkboxes', () => {
       cy.get('input[type="checkbox"]')
         .check()
         .should('be.checked')
@@ -223,12 +221,12 @@ describe('Central de Atentimento ao Cliente TAT', () => {
         .uncheck()
         .should('not.be.checked')  
     })
-    it.only('Marcando o check do telefone e o tornando obrigatorio', () => {
+    it('Marcando o check do telefone e o tornando obrigatorio', () => {
       const formData = {
-        firstName: "Antonio",
-        lastName: "Feliciano de Castilho",
-        email: "antonio.feliciano@btgpactual.com",
-        message: "Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco Vasco " 
+        firstName: "Jaffrey",
+        lastName: "Thompson Grey",
+        email: "jaffrey@test.com",
+        message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut tellus nec sapien fringilla pharetra. Nulla facilisi. Nullam laoreet quam id sapien lacinia, in interdum justo euismod. Sed feugiat quam a tortor venenatis, sed fringilla massa vulputate." 
       }
       cy.OnlyWriteObritatoryinputs(formData)
 
@@ -251,4 +249,16 @@ describe('Central de Atentimento ao Cliente TAT', () => {
       cy.get('span[class="success"]').should('be.visible')
 
     })
+    it('Verificando politica de privacidade, lidando com links que abrem em outra aba', () => {
+      cy.get('#privacy a').should('have.attr', 'target', '_blank')
+    }) 
+
+    it('Acessa a página da politica de privacidade removendo o target e então clicando no link', () => {
+      cy.get('#privacy a')
+        .invoke('removeAttr', 'target')
+        .click()
+
+      cy.contains('Talking About Testing').should('be.visible')
+    })
+
 })

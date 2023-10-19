@@ -5,6 +5,8 @@
   "main": "src/index.html",
   "scripts": {
     "cy:open": "cypress open",
+    "cy:open:mobile": "cypress open --config viewportWidth=410 vbiewportHeight=860",
+    "test:mobile": "cypress run --config viewportWidth=410 vbiewportHeight=860",
     "test": "cypress run"
   },
   "repository": {
@@ -21,7 +23,7 @@
   "author": "Walmyr Filho <wlsf82@gmail.com> (https://walmyr.dev/)",
   "license": "MIT",
   "homepage": "https://github.com/wlsf82/cypress-basico-v2#readme",
-  "dependencies": {
-    "cypress": "^12.17.3"
+  "devDependencies": {
+    "cypress": "^13.3.2"
   }
 }
