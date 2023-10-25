@@ -291,7 +291,7 @@ describe('Central de Atentimento ao Cliente TAT', () => {
       cy.contains('Talking About Testing').should('be.visible')
     })
 
-    it.only('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
+    it('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
       cy.get('.success')
         .should('not.be.visible')
         .invoke('show')
@@ -306,6 +306,21 @@ describe('Central de Atentimento ao Cliente TAT', () => {
         .and('contain', 'Valide os campos obrigatórios!')
         .invoke('hide')
         .should('not.be.visible')
+    })
+
+    it('Faz uma requisição HTTP', () => {
+      cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')
+        .should((response) => {
+          const { status, statusText, body} = response
+          expect(status).to.equal(200)
+          expect(statusText).to.equal('OK')
+          expect(body).to.include('CAC TAT')      
+      })
+    })
+    it('Desafio encontre o gato escondido', () => {
+      cy.get('span[id="cat"]')
+        .invoke('show')
+        .should('be.visible')
     })
 
 })
